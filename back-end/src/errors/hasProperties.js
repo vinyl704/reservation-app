@@ -1,7 +1,6 @@
 function hasProperties(...properties) {
     return function (req, res, next) {
       const { data = {} } = req.body;
-      console.log("hasprops ", data)
       try {
         properties.forEach((property) => {
           if (!data[property] || data[property] == "") {

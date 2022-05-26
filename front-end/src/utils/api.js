@@ -68,7 +68,7 @@ export async function listReservations(params, signal) {
     .then(formatReservationTime);
 }
 
-export async function createRes(params,signal){
+export async function createReservation(params,signal){
   const url = `${API_BASE_URL}/reservations`
   const options = {
     method:'POST',

@@ -35,28 +35,6 @@ export default function ReservationForm() {
         setFormData({...formData,[e.target.name]:e.target.value})
     }
 
-  //    async function post(formData,signal){
-  //     const headers = new Headers();
-  //     headers.append("Content-Type", "application/json");
-  //        formData.people = Number(formData.people)
-  //        try{
-  //          const d = await fetch(`${url}/reservations`,{
-  //    method: "POST",
-  //   headers,
-  //    body: JSON.stringify({data:formData}),
-  //    signal
-    
-  //  } )
-  //  setErrors({});
-  //  return d;
-  //        }catch(error){
-  //         if(!errors[error.message]){
-  //           setErrors({ ...errors, [error.message] : 1})
-  //         }
-  //        }
-   
- //}
-
     const submitHandler = async (e) =>{
       e.preventDefault();
       const ac = new AbortController();

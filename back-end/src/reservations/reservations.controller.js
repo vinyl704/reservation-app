@@ -101,6 +101,23 @@ async function create(req, res) {
   res.status(201).json({ data });
 }
 
+async function exists(req,res,next){
+  const {reservation_id} = req.params
+  const data = await service.read(reservation_id);
+  console.log("exists middleware: ",data)
+  if(!data){
+    return next({status:404,message:`uhhh no: ${reservation_id}`})
+  }
+
+  return next()
+}
+
+async function read(req,res){
+  const {reservation_id} = req.params
+  const data = await service.read(reservation_id);
+  res.json({data})
+}
+
 module.exports = {
   list: asyncErrorBoundary(list),
   create: [
@@ -111,4 +128,5 @@ module.exports = {
     asyncErrorBoundary(validPeople),
     asyncErrorBoundary(create),
   ],
+  read:[asyncErrorBoundary(exists),asyncErrorBoundary(read)]
 };

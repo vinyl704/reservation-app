@@ -5,11 +5,8 @@ const controller = require("./tables.controller")
 router
     .route("/:table_id/seat")
     .put(controller.update)
-
-router
-    .route("/:table_id")
-    .get(controller.read)
     .all(methodNotAllowed)
+
 router
     .route("/")
     .get(controller.list)

@@ -11,19 +11,23 @@ function read(table_id){
      return knex("tables")
      .select("*")
      .where({table_id})
+     .first()
  }
 
 function create(table){
     return knex("tables")
     .insert(table)
+    .returning("*")
     .then(createdTable => createdTable[0])
 }
 
 function update(table_id,reservation_id){
+    //
     return knex("tables")
     .where({table_id})
-    .update({reservation_id},["table_id","reservation_id"])
-    //.then(updatedTable => updatedTable[0])
+    .update({reservation_id})
+    .then(updatedTable => updatedTable[0])
+    .catch(console.log)
 }
 
 module.exports = {

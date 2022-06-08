@@ -30,6 +30,15 @@ function update(table_id,reservation_id){
     .catch(console.log)
 }
 
+function finish(table_id){
+    return knex("tables")
+    .select("*")
+    .where({table_id})
+    .update({reservation_id : null})
+    .then(finishedTable => finishedTable[0])
+    .catch(console.log)
+}
+
 module.exports = {
-    list,read,create,update
+    list,read,create,update,finish
 }

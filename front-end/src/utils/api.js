@@ -103,7 +103,7 @@ export async function seatReservation(tableId,params,signal){
   const options = {
     method:'PUT',
     headers,
-    body:JSON.stringify({data:{params}}),
+    body:JSON.stringify({data:{reservation_id:params}}),
     signal,
   }
   return await fetchJson(url,options,{})

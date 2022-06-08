@@ -5,7 +5,7 @@ import { createReservation } from "../utils/api";
 import Error from "./Error";
 
 
-const url = process.env.REACT_APP_API_BASE_URL || 'http://localhost:5001';
+//const url = process.env.REACT_APP_API_BASE_URL || 'http://localhost:5001';
 export default function ReservationForm() {
     const initForm = {
         first_name: '',

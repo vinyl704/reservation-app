@@ -105,10 +105,21 @@ async function update(req, res, next) {
   res.json({ data });
 }
 
+async function tableOccupied(req,res,next){
+    const { table_id } = req.params
+    const data = await service.read(table_id)
+    if(data.reservation_id){
+        res.locals.table_id = table_id
+        return next()
+    }
+    return next({status:400,message:"table not occupied"})
+}
+
 async function finish(req,res,next){
-    console.log(req.body)
-    const { table_id } = req.body.data
+    console.log(res.locals)
+    const { table_id } = res.locals
     const data = await service.finish(table_id)
+    res.json({data})
 }
 
 module.exports = {
@@ -128,5 +139,7 @@ module.exports = {
     asyncErrorBoundary(tableLargeEnough),
     asyncErrorBoundary(update),
   ],
-  delete:finish
+  delete:[asyncErrorBoundary(tableExists),
+    asyncErrorBoundary(tableOccupied),
+    asyncErrorBoundary(finish)]
 };

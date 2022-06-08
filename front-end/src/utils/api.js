@@ -77,5 +77,34 @@ export async function createReservation(params,signal){
     signal,
   }
 
-  return await fetchJson(url,options,params)
+  return await fetchJson(url,options,[])
+}
+
+export async function formSubmit(params,signal){
+  const url = `${API_BASE_URL}/tables`
+  const options = {
+    method:'POST',
+    headers,
+    body:JSON.stringify({data:{...params,capacity:Number(params.capacity)}}),
+    signal,
+  }
+
+  return await fetchJson(url,options,[])
+}
+
+export async function getTables(){
+  const url = `${API_BASE_URL}/tables`
+  
+  return await fetchJson(url)
+}
+
+export async function seatReservation(tableId,params,signal){
+  const url = `${API_BASE_URL}/tables/${tableId}/seat`
+  const options = {
+    method:'PUT',
+    headers,
+    body:JSON.stringify({data:{reservation_id:params}}),
+    signal,
+  }
+  return await fetchJson(url,options,{})
 }

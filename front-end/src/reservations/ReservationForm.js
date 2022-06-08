@@ -5,7 +5,7 @@ import { createReservation } from "../utils/api";
 import Error from "./Error";
 
 
-const url = process.env.REACT_APP_API_BASE_URL || 'http://localhost:5001';
+//const url = process.env.REACT_APP_API_BASE_URL || 'http://localhost:5001';
 export default function ReservationForm() {
     const initForm = {
         first_name: '',
@@ -34,28 +34,6 @@ export default function ReservationForm() {
         e.preventDefault()
         setFormData({...formData,[e.target.name]:e.target.value})
     }
-
-  //    async function post(formData,signal){
-  //     const headers = new Headers();
-  //     headers.append("Content-Type", "application/json");
-  //        formData.people = Number(formData.people)
-  //        try{
-  //          const d = await fetch(`${url}/reservations`,{
-  //    method: "POST",
-  //   headers,
-  //    body: JSON.stringify({data:formData}),
-  //    signal
-    
-  //  } )
-  //  setErrors({});
-  //  return d;
-  //        }catch(error){
-  //         if(!errors[error.message]){
-  //           setErrors({ ...errors, [error.message] : 1})
-  //         }
-  //        }
-   
- //}
 
     const submitHandler = async (e) =>{
       e.preventDefault();

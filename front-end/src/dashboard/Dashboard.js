@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { listReservations, getTables } from "../utils/api";
+import { listReservations, getTables, finishReservation } from "../utils/api";
 import useQuery from "../utils/useQuery";
 import ErrorAlert from "../layout/ErrorAlert";
 import { today, next, previous } from "../utils/date-time";
@@ -49,9 +49,25 @@ function Dashboard({ date }) {
     setPageDate(() => today());
     history.push(`/dashboard?date=${today()}`);
   };
+
+  const finishHandler = async ({table}) =>{
+    //console.log("finish handler: ", table, table.table_id)
+    const ac = new AbortController()
+    const signal = ac.signal
+    try {
+      await finishReservation(table.table_id,signal)
+    } catch (error) {
+      console.log(error)
+    }
+    return ()=> ac.abort()
+  }
   
-  const finishButton = (finishHandler) => (
-    <button onClick={finishHandler}>Finish</button>
+  const FinishButton = (table) => (
+    <button 
+    data-table-id-finish={table.table_id}
+    onClick={()=>finishHandler(table)}>
+      Finish
+      </button>
   );
   const tableElement = (
     <>
@@ -61,7 +77,7 @@ function Dashboard({ date }) {
           <td>{table.table_name}</td>
           <td>{table.capacity}</td>
           <td data-table-id-status={`${table.table_id}`}>{table.reservation_id ? "Occupied" : "Free"}</td>
-          <td>{table.reservation_id !== null ? finishButton : ""}</td>
+          <td>{table.reservation_id && <FinishButton table={table} />}</td>
         </tr>
       ))}
     </>
@@ -146,7 +162,7 @@ function Dashboard({ date }) {
             <th>NAME</th>
             <th>CAPACITY</th>
             <th>FREE?</th>
-            <th></th>
+            <th> </th>
           </tr>
         </thead>
         <tbody>{tableElement}</tbody>

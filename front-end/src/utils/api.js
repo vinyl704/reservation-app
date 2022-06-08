@@ -108,3 +108,16 @@ export async function seatReservation(tableId,params,signal){
   }
   return await fetchJson(url,options,{})
 }
+
+export async function finishReservation(table_id,signal){
+console.log("finish in api: ",table_id)
+const url = `${API_BASE_URL}/tables/${table_id}/seat`
+const options = {
+  method:'DELETE',
+  headers,
+  body:JSON.stringify({data:{table_id}}),
+    signal,
+}
+
+return await fetchJson(url,options,{})
+}

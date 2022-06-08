@@ -105,6 +105,12 @@ async function update(req, res, next) {
   res.json({ data });
 }
 
+async function finish(req,res,next){
+    console.log(req.body)
+    const { table_id } = req.body.data
+    const data = await service.finish(table_id)
+}
+
 module.exports = {
   list: asyncErrorBoundary(list),
   read: [asyncErrorBoundary(tableExists), 
@@ -122,4 +128,5 @@ module.exports = {
     asyncErrorBoundary(tableLargeEnough),
     asyncErrorBoundary(update),
   ],
+  delete:finish
 };

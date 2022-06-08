@@ -28,6 +28,8 @@ function read(reservation_id){
     .where({reservation_id})
     .first()
 }
+
+
 module.exports = {
     list,create,destroy,read
 }

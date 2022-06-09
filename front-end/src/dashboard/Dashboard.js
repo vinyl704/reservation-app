@@ -4,6 +4,8 @@ import useQuery from "../utils/useQuery";
 import ErrorAlert from "../layout/ErrorAlert";
 import { today, next, previous } from "../utils/date-time";
 import { useHistory } from "react-router";
+import Reservations from "../reservations/Reservations";
+import Tables from "../tables/Tables";
 /**
  * Defines the dashboard page.
  * @param date
@@ -29,7 +31,7 @@ function Dashboard({ date }) {
     .catch(setReservationsError);
     getTables(abortController.signal)
     .then(setTables)
-    .catch(console.log);
+    .catch(setReservationsError);
     return () => abortController.abort();
   }
   const history = useHistory();
@@ -50,38 +52,8 @@ function Dashboard({ date }) {
     history.push(`/dashboard?date=${today()}`);
   };
 
-  const finishHandler = async ({table}) =>{
-    //console.log("finish handler: ", table, table.table_id)
-    const ac = new AbortController()
-    const signal = ac.signal
-    try {
-      await finishReservation(table.table_id,signal)
-    } catch (error) {
-      console.log(error)
-    }
-    return ()=> ac.abort()
-  }
   
-  const FinishButton = (table) => (
-    <button 
-    data-table-id-finish={table.table_id}
-    onClick={()=>finishHandler(table)}>
-      Finish
-      </button>
-  );
-  const tableElement = (
-    <>
-      {tables.map((table) => (
-        <tr key={table.table_id}>
-          <td>{table.table_id}</td>
-          <td>{table.table_name}</td>
-          <td>{table.capacity}</td>
-          <td data-table-id-status={`${table.table_id}`}>{table.reservation_id ? "Occupied" : "Free"}</td>
-          <td>{table.reservation_id && <FinishButton table={table} />}</td>
-        </tr>
-      ))}
-    </>
-  );
+  
 
   return (
     <main>
@@ -101,72 +73,8 @@ function Dashboard({ date }) {
         </div>
       </div>
       <ErrorAlert error={reservationsError} />
-      <table>
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>NAME</th>
-            <th>PHONE</th>
-            <th>DATE</th>
-            <th>TIME</th>
-            <th>PEOPLE</th>
-            <th>STATUS</th>
-            <th></th>
-            <th></th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          {reservations.map((reservation) => {
-            const {
-              reservation_id,
-              first_name,
-              last_name,
-              mobile_number,
-              reservation_date,
-              reservation_time,
-              people,
-              status = "booked",
-            } = reservation;
-            return (
-              <tr key={reservation_id}>
-                <td>{reservation_id}</td>
-                <td>
-                  {first_name} {last_name}
-                </td>
-                <td>{mobile_number}</td>
-                <td>{reservation_date}</td>
-                <td>{reservation_time}</td>
-                <td>{people}</td>
-                <td>{status}</td>
-                <td>
-                  {status === "booked" && (
-                    <a className="btn btn-secondary" href={`/reservations/${reservation_id}/seat`}>Seat</a>
-                  )}
-                </td>
-                <td>
-                  <button className="btn btn-primary">Edit</button>
-                </td>
-                <td>
-                  <button className="btn btn-danger">Cancel</button>
-                </td>
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
-      <table>
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>NAME</th>
-            <th>CAPACITY</th>
-            <th>FREE?</th>
-            <th> </th>
-          </tr>
-        </thead>
-        <tbody>{tableElement}</tbody>
-      </table>
+      <Reservations className="col col-sm-12 col-6" reservations={reservations}/>
+      <Tables className="col col-sm-12 col-6" tables={tables}/>
     </main>
   );
 }

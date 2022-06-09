@@ -5,7 +5,7 @@ import Error from "./Error"
 export default function SeatReservation(){
     
     const {reservation_id} = useParams()
-    console.log(reservation_id)
+    //console.log(reservation_id)
     const history = useHistory()
     const [tableList,setTableList] = useState([])
     useEffect(()=>{
@@ -21,22 +21,22 @@ export default function SeatReservation(){
         ));
         const submitHandler = async (e)=>{
             e.preventDefault();
-            const ac = new AbortController();
-        console.log("selectedTable: ",selectedTable)
+            
+        //console.log("selectedTable: ",selectedTable)
         try {
-            await seatReservation(selectedTable,reservation_id,ac.signal)
+            await seatReservation(selectedTable,reservation_id)
             history.push("/dashboard")
         } catch (error) {
             if(!errors[error.message]){
                 setErrors({ ...errors, [error.message] : 1})
               }
         }
-        return ()=>ac.abort()
+        
     }
     const handleChange=(e)=>{
         setSelectedTable(e.target.value)
     }
-    console.log(errors)
+    //console.log(errors)
     //const errorElement = errors.map(err=><ErrorAlert error={err}/>)
     return (
         <div className="d-flex flex-column col-12 justify-content-center flex-wrap">

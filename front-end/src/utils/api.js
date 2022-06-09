@@ -58,12 +58,12 @@ async function fetchJson(url, options, onCancel) {
  *  a promise that resolves to a possibly empty array of reservation saved in the database.
  */
 
-export async function listReservations(params, signal) {
+export function listReservations(params, signal) {
   const url = new URL(`${API_BASE_URL}/reservations`);
   Object.entries(params).forEach(([key, value]) =>
     url.searchParams.append(key, value.toString())
   );
-  return await fetchJson(url, { headers, signal }, [])
+  return fetchJson(url, { headers, signal }, [])
     .then(formatReservationDate)
     .then(formatReservationTime);
 }
@@ -98,25 +98,24 @@ export async function getTables(){
   return await fetchJson(url)
 }
 
-export async function seatReservation(tableId,params,signal){
+export async function seatReservation(tableId,params){
   const url = `${API_BASE_URL}/tables/${tableId}/seat`
   const options = {
     method:'PUT',
     headers,
     body:JSON.stringify({data:{reservation_id:params}}),
-    signal,
+    
   }
   return await fetchJson(url,options,{})
 }
 
-export async function finishReservation(table_id,signal){
-console.log("finish in api: ",table_id)
+export async function finishReservation(table_id){
+//console.log("finish in api: ",table_id)
 const url = `${API_BASE_URL}/tables/${table_id}/seat`
 const options = {
   method:'DELETE',
   headers,
   body:JSON.stringify({data:{table_id}}),
-    signal,
 }
 
 return await fetchJson(url,options,{})

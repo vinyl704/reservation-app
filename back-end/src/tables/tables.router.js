@@ -5,7 +5,7 @@ const controller = require("./tables.controller")
 router
     .route("/:table_id/seat")
     .put(controller.update)
-    .delete(controller.delete)
+    .delete(controller.finish)
     .all(methodNotAllowed)
 
 router

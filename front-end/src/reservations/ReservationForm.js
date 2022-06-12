@@ -1,6 +1,5 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import { useHistory } from "react-router";
-import { today } from "../utils/date-time";
 import { createReservation } from "../utils/api";
 import Error from "./Error";
 
@@ -11,16 +10,16 @@ export default function ReservationForm() {
         first_name: '',
         last_name: '',
         mobile_number:'',
-        reservation_date:today(),
-        reservation_time: Date().getTime,
+        reservation_date:'',
+        reservation_time: '',
         people: 1
 
     }
     
-    const [formData,setFormData] = useState({...initForm})
+    const [formData,setFormData] = useState(initForm)
     const [errors,setErrors] = useState({})
     const history = useHistory()
-
+    
    
     const errorMap = Object.keys(errors).map((error, index) => (
       <Error key={index} error={error} />
@@ -41,8 +40,8 @@ export default function ReservationForm() {
       formData.people = parseInt(formData.people);
       try {
         await createReservation(formData, ac.signal);
-        history.push(`/dashboard?date=${formData.reservation_date}`);
         setErrors({});
+        history.push(`/dashboard?date=${formData.reservation_date}`);
       } catch (error) {
         if(!errors[error.message]){
           setErrors({ ...errors, [error.message] : 1})
@@ -62,7 +61,7 @@ export default function ReservationForm() {
       <label htmlFor="reservation_date">Reservation Date</label>
       <input type="date" name="reservation_date" id="reservationDate" value={formData.reservation_date} onChange={changeHandler}/>
       <label htmlFor="reservation_time">Reservation Time</label>
-      <input type="time" name="reservation_time" id="reservationTime" onChange={changeHandler}/>
+      <input type="time" name="reservation_time" id="reservationTime" onChange={changeHandler} value={formData.reservation_time}/>
       <label htmlFor="people">Party Size</label>
       <input type="number" name="people" id="people" value={formData.people} onChange={changeHandler} min={1} />
 

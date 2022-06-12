@@ -78,6 +78,7 @@ async function reservationExists(req, res, next) {
   const data = await resService.read(reservation_id);
 
   if (data) {
+    res.locals.reservation = data
     res.locals.people = data.people;
     return next();
   }
@@ -95,6 +96,14 @@ async function tableLargeEnough(req, res, next) {
     });
   }
   return next();
+}
+
+function isSeated(req,res,next){
+  const reservation = res.locals.reservation
+  if(reservation.status === "booked"){
+    return next()
+  }
+  return next({status:400,message:`Reservation already seated or otherwise`})
 }
 
 async function update(req, res, next) {
@@ -117,8 +126,8 @@ async function tableOccupied(req,res,next){
 
 async function finish(req,res,next){
     //console.log(res.locals)
-    const { table_id } = res.locals
-    const data = await service.finish(table_id)
+    const { table:{table_id,reservation_id} } = res.locals
+    const data = await service.finish(table_id,reservation_id)
     res.json({data})
 }
 
@@ -134,12 +143,13 @@ module.exports = {
     hasData,
     asyncErrorBoundary(hasReservationId),
     asyncErrorBoundary(reservationExists),
+    isSeated,
     asyncErrorBoundary(tableExists),
     isTableAvailable,
     asyncErrorBoundary(tableLargeEnough),
     asyncErrorBoundary(update),
   ],
-  delete:[asyncErrorBoundary(tableExists),
+  finish:[asyncErrorBoundary(tableExists),
     asyncErrorBoundary(tableOccupied),
     asyncErrorBoundary(finish)]
 };

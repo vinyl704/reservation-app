@@ -3,6 +3,7 @@ import { finishReservation } from "../utils/api";
 import { useHistory } from "react-router-dom";
 export default function Table({ table }) {
   const history = useHistory();
+  
   const finishHandler = async (e) => {
     e.preventDefault();
     const conf = window.confirm(

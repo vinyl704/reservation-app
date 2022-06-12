@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { listReservations, getTables, finishReservation } from "../utils/api";
+import { listReservations, getTables } from "../utils/api";
 import useQuery from "../utils/useQuery";
 import ErrorAlert from "../layout/ErrorAlert";
 import { today, next, previous } from "../utils/date-time";
@@ -21,17 +21,17 @@ function Dashboard({ date }) {
   const [pageDate, setPageDate] = useState(dateQuery ? dateQuery : date);
   const [tables, setTables] = useState([]);
   useEffect(loadDashboard, [pageDate, date]);
-  
+
   function loadDashboard() {
     const date = pageDate;
     const abortController = new AbortController();
     setReservationsError(null);
     listReservations({ date }, abortController.signal)
-    .then(setReservations)
-    .catch(setReservationsError);
+      .then(setReservations)
+      .catch(setReservationsError);
     getTables(abortController.signal)
-    .then(setTables)
-    .catch(setReservationsError);
+      .then(setTables)
+      .catch(setReservationsError);
     return () => abortController.abort();
   }
   const history = useHistory();
@@ -52,9 +52,6 @@ function Dashboard({ date }) {
     history.push(`/dashboard?date=${today()}`);
   };
 
-  
-  
-
   return (
     <main>
       <h1>Dashboard</h1>
@@ -73,8 +70,12 @@ function Dashboard({ date }) {
         </div>
       </div>
       <ErrorAlert error={reservationsError} />
-      <Reservations className="col col-sm-12 col-6" reservations={reservations}/>
-      <Tables className="col col-sm-12 col-6" tables={tables}/>
+      <div className="col col-8">
+        <Reservations reservations={reservations} />
+      </div>
+      <div className="col col-4">
+        <Tables tables={tables} />
+      </div>
     </main>
   );
 }

@@ -24,6 +24,9 @@ function Routes() {
       <Route path="/reservations/new">
         <ReservationForm />
       </Route>
+      <Route path="/reservations/:reservation_id/edit">
+        <h2>You will be able to edit chit here</h2>
+      </Route>
       <Route path="/reservations/:reservation_id/seat">
         <SeatReservation/>
       </Route>

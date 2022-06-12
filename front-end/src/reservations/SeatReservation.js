@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { useHistory,useParams } from "react-router"
-import { getTables,seatReservation } from "../utils/api"
+import { getTables,seatReservation, setReservationStatus } from "../utils/api"
 import Error from "./Error"
 export default function SeatReservation(){
     
@@ -31,6 +31,7 @@ export default function SeatReservation(){
                 setErrors({ ...errors, [error.message] : 1})
               }
         }
+        await setReservationStatus(reservation_id)
         
     }
     const handleChange=(e)=>{

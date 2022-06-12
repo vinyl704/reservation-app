@@ -1,6 +1,6 @@
 import './tables.css'
 import Table from './Table'
-export default function Tables({tables, FinishButton}){
+export default function Tables({tables}){
    
     return(
     <table>

@@ -80,22 +80,16 @@ export async function createReservation(params,signal){
   return await fetchJson(url,options,[])
 }
 
-export async function formSubmit(params,signal){
-  const url = `${API_BASE_URL}/tables`
+export async function editReservation(reservation_id,updatedReservation,signal){
+  const url = `${API_BASE_URL}/reservations/${reservation_id}`
   const options = {
-    method:'POST',
+    method:'PUT',
     headers,
-    body:JSON.stringify({data:{...params,capacity:Number(params.capacity)}}),
+    body:JSON.stringify({data:updatedReservation}),
     signal,
   }
 
   return await fetchJson(url,options,[])
-}
-
-export async function getTables(){
-  const url = `${API_BASE_URL}/tables`
-  
-  return await fetchJson(url)
 }
 
 export async function seatReservation(tableId,params){
@@ -109,6 +103,27 @@ export async function seatReservation(tableId,params){
   return await fetchJson(url,options,{})
 }
 
+export async function setReservationStatus(reservation_id){
+  const url = `${API_BASE_URL}/reservations/${reservation_id}/seat`
+  const options = {
+    method:'PUT',
+    headers,
+    body:JSON.stringify({data:{reservation_id}})
+  }
+  return await fetchJson(url,options)
+}
+
+export async function formSubmit(params,signal){
+  const url = `${API_BASE_URL}/tables`
+  const options = {
+    method:'POST',
+    headers,
+    body:JSON.stringify({data:{...params,capacity:Number(params.capacity)}}),
+    signal,
+  }
+  return await fetchJson(url,options,[])
+}
+
 export async function finishReservation(table_id){
 //console.log("finish in api: ",table_id)
 const url = `${API_BASE_URL}/tables/${table_id}/seat`
@@ -117,6 +132,10 @@ const options = {
   headers,
   body:JSON.stringify({data:{table_id}}),
 }
-
 return await fetchJson(url,options,{})
+}
+
+export async function getTables(){
+  const url = `${API_BASE_URL}/tables`
+  return await fetchJson(url)
 }

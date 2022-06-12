@@ -104,7 +104,6 @@ function validPeople(req, res, next) {
 function isStatusValid(req, res, next) {
   const {data ={}} = req.body
   const { status } = data;
-  console.log("line 107: ",status)
   if (status == "booked" || status == undefined) {
     return next();
   }
@@ -143,7 +142,10 @@ function validStatus(req, res, next) {
 
 
 async function list(req, res) {
-  res.json({ data: await service.list(req.query.date) });
+  let current = new Date();
+  let cDate = current.getFullYear() + '-' + (current.getMonth() + 1) + '-' + current.getDate();
+  const {date = cDate} = req.query
+  res.json({ data: await service.list(date) });
 }
 
 function read(req, res) {
@@ -157,7 +159,6 @@ async function create(req, res) {
 async function statusUpdate(req, res) {
   const { status } = req.body.data;
   const reservation = res.locals.reservation
-  //console.log(status)
   reservation.status = status
   const data = await service.statusUpdate(reservation);
   res.json({ data });

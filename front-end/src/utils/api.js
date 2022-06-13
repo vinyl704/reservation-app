@@ -79,7 +79,15 @@ export async function createReservation(reservation,signal){
   return await fetchJson(url,options,reservation)
 }
 
-//TODO:ADD EDIT PAGE IN RESERVATION RESOURCE FOLDER
+export async function readReservation(reservation_id, signal) {
+  const url = `${API_BASE_URL}/reservations/${reservation_id}`;
+  const options = {
+    method: "GET",
+    signal,
+  };
+  return await fetchJson(url, options);
+}
+
 export async function editReservation(reservation_id,updatedReservation,signal){
   const url = `${API_BASE_URL}/reservations/${reservation_id}`
   const options = {
@@ -112,6 +120,16 @@ export async function createTable(table,signal){
     signal,
   }
   return await fetchJson(url,options,table)
+}
+
+export async function cancelReservation(reservation, status) {
+  const url = `${API_BASE_URL}/reservations/${reservation.reservation_id}/status`;
+  const options = {
+    method: "PUT",
+    body: JSON.stringify({ data: { status } }),
+    headers,
+  };
+  return await fetchJson(url, options, reservation);
 }
 
 export async function finishReservation(table_id){

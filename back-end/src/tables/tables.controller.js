@@ -125,7 +125,6 @@ async function tableOccupied(req,res,next){
 }
 
 async function finish(req,res,next){
-    //console.log(res.locals)
     const { table:{table_id,reservation_id} } = res.locals
     const data = await service.finish(table_id,reservation_id)
     res.json({data})

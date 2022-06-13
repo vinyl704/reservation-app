@@ -8,7 +8,6 @@ export default function Search(){
 
     const handleChange = (e)=>{
         setNumber(e.target.value)
-        console.log(number)
     }
 
     const handleClick = (e)=>{
@@ -18,7 +17,6 @@ export default function Search(){
         .then(setResults)
         return ()=>ac.abort()
     }
-    console.log(results)
     return(
         <div>
 

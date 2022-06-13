@@ -144,8 +144,14 @@ function validStatus(req, res, next) {
 async function list(req, res) {
   let current = new Date();
   let cDate = current.getFullYear() + '-' + (current.getMonth() + 1) + '-' + current.getDate();
-  const {date = cDate} = req.query
-  res.json({ data: await service.list(date) });
+  if(req.query.mobile_number){
+    const data = await service.search(req.query.mobile_number)
+    res.json({ data })
+  }else{
+    const { date } = req.query
+  res.json({ data: await service.list(date || cDate) });
+  }
+  
 }
 
 function read(req, res) {

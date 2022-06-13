@@ -7,6 +7,7 @@ import { today } from "../utils/date-time";
 import ReservationForm from "../reservations/ReservationForm";
 import TableForm from "../tables/TableForm";
 import SeatReservation from "../reservations/SeatReservation";
+import Search from "../reservations/Search"
 //const reservations = listReservations()
 /**
  * Defines all the routes for the application.
@@ -38,6 +39,9 @@ function Routes() {
       </Route>
       <Route path="/tables/new">
         <TableForm/>
+      </Route>
+      <Route path="/search">
+        <Search />
       </Route>
       <Route>
         <NotFound />

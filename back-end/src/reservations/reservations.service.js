@@ -16,10 +16,13 @@ function create(newReservation){
         .then(newData => newData[0])
 }
 
-function destroy(id){
+function search(mobile_number){
     return knex("reservations")
-    .where(id)
-    .del()
+     .whereRaw(
+       "translate(mobile_number, '() -', '') like ?",
+       `%${mobile_number.replace(/\D/g, "")}%`
+     )
+     .orderBy("reservation_date");
 }
 
 function read(reservation_id){
@@ -47,5 +50,5 @@ function update(updatedReservation){
 }
 
 module.exports = {
-    list,create,destroy,read,update, statusUpdate
+    list,create,read, statusUpdate,search,update
 }

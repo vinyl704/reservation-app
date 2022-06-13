@@ -58,13 +58,13 @@ function Dashboard({ date }) {
       <div className="d-md-flex mb-3">
         <h4 className="mb-0">Reservations for date</h4>
         <div className="btn-group">
-          <button onClick={previousDateHandler} name="previous" className="btn">
+          <button onClick={previousDateHandler} name="previous" className="btn btn-secondary">
             Previous Day
           </button>
-          <button onClick={todayHandler} name="today" className="btn">
+          <button onClick={todayHandler} name="today" className="btn btn-secondary">
             Today
           </button>
-          <button onClick={nextDateHandler} name="next" className="btn">
+          <button onClick={nextDateHandler} name="next" className="btn btn-secondary">
             Next Day
           </button>
         </div>

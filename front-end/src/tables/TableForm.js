@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { useHistory } from "react-router"
-import { formSubmit } from "../utils/api"
+import { createTable } from "../utils/api"
 
 export default function TableForm(){
     const history = useHistory()
@@ -23,7 +23,7 @@ export default function TableForm(){
         const ac = new AbortController();
         const signal = ac.signal
         try {
-            formSubmit({...formData,capacity:parseInt(formData.capacity)},signal)
+            createTable({...formData,capacity:parseInt(formData.capacity)},signal)
             history.push('/dashboard')
         } catch (error) {
             throw error

@@ -76,7 +76,7 @@ export async function createReservation(reservation,signal){
     body:JSON.stringify({data:reservation}),
     signal,
   }
-  return await fetchJson(url,options,[])
+  return await fetchJson(url,options,reservation)
 }
 
 //TODO:ADD EDIT PAGE IN RESERVATION RESOURCE FOLDER
@@ -103,15 +103,15 @@ export async function seatReservation(tableId,reservation_id){
   return await fetchJson(url,options,{})
 }
 
-export async function formSubmit(reservation,signal){
+export async function createTable(table,signal){
   const url = `${API_BASE_URL}/tables`
   const options = {
     method:'POST',
     headers,
-    body:JSON.stringify({data:{...reservation,capacity:Number(reservation.capacity)}}),
+    body:JSON.stringify({data:{...table,capacity:Number(table.capacity)}}),
     signal,
   }
-  return await fetchJson(url,options,[])
+  return await fetchJson(url,options,table)
 }
 
 export async function finishReservation(table_id){

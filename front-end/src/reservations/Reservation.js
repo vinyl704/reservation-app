@@ -1,5 +1,19 @@
+import {cancelReservation} from '../utils/api'
+import { useHistory } from 'react-router'
+
 export default function Reservation({reservation}){
-    
+  const history = useHistory();
+  
+  const cancelHandler = async (e) => {
+    e.preventDefault();
+    const conf = window.confirm(
+      "Do you want to cancel this reservation? This cannot be undone."
+    );
+    if (conf) {
+      await cancelReservation(reservation,"cancelled");
+      history.push("/");
+    }
+  };
       return (
         <tr key={reservation.reservation_id}>
           <td>{reservation.reservation_id}</td>
@@ -17,10 +31,10 @@ export default function Reservation({reservation}){
             ):null}
           </td> 
           <td>
-            <button className="btn btn-primary">Edit</button>
+            <a href={`/reservations/${reservation.reservation_id}/edit`} className="btn btn-primary">Edit</a>
           </td>
           <td>
-            <button className="btn btn-danger">Cancel</button>
+            <button className="btn btn-danger" onClick={cancelHandler} data-reservation-id-cancel={reservation.reservation_id}>Cancel</button>
           </td>
         </tr>
       );

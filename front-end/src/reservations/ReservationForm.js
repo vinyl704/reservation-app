@@ -1,11 +1,16 @@
 import React, {useEffect, useState} from "react";
-import { useHistory } from "react-router";
-import { createReservation } from "../utils/api";
+import { useHistory, useParams } from "react-router";
+import { createReservation, editReservation, readReservation } from "../utils/api";
+
 import Error from "./Error";
 
 
 //const url = process.env.REACT_APP_API_BASE_URL || 'http://localhost:5001';
-export default function ReservationForm() {
+export default function ReservationForm({mode="create"}) {
+
+    const { reservation_id }= useParams();
+      
+    
     const initForm = {
         first_name: '',
         last_name: '',
@@ -20,7 +25,18 @@ export default function ReservationForm() {
     const [errors,setErrors] = useState({})
     const history = useHistory()
     
-   
+   useEffect(()=>{
+     setFormData({})
+        if(mode === "edit"){
+        const ac = new AbortController()
+        readReservation(reservation_id,ac.signal)
+        .then(res=>({...res,reservation_date:res.reservation_date.split("T")[0]}))
+        .then(setFormData)
+        return()=>ac.abort()
+        }
+        
+      },[mode,reservation_id])
+
     const errorMap = Object.keys(errors).map((error, index) => (
       <Error key={index} error={error} />
     ));
@@ -39,7 +55,11 @@ export default function ReservationForm() {
       const ac = new AbortController();
       formData.people = parseInt(formData.people);
       try {
-        await createReservation(formData, ac.signal);
+        if(mode === "create"){
+          await createReservation(formData, ac.signal);
+        }else{
+          await editReservation(reservation_id,formData,ac.signal)
+        }
         setErrors({});
         history.push(`/dashboard?date=${formData.reservation_date}`);
       } catch (error) {

@@ -24,6 +24,7 @@ const VALID_PROPERTIES = [
   "created_at",
   "updated_at",
   "status",
+  "reservation_id"
 ];
 
 function hasOnlyValidProperties(req, res, next) {
@@ -171,8 +172,9 @@ async function statusUpdate(req, res) {
 }
 
 async function update(req, res, next) {
+  //console.log(res.locals.reservation_id)
   const updatedReservation = {...req.body.data};
-  updatedReservation.reservation_id = res.locals.reservation_id
+  updatedReservation.reservation_id = res.locals.reservation.reservation_id
   const data = await service.update(updatedReservation);
   res.json({ data });
 }

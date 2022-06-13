@@ -23,10 +23,10 @@ function Routes() {
         <Redirect to={"/dashboard"} />
       </Route>
       <Route path="/reservations/new">
-        <ReservationForm />
+        <ReservationForm mode="create"/>
       </Route>
       <Route path="/reservations/:reservation_id/edit">
-        <h2>You will be able to edit chit here</h2>
+        <ReservationForm mode="edit"/>
       </Route>
       <Route path="/reservations/:reservation_id/seat">
         <SeatReservation/>

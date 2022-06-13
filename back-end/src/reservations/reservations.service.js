@@ -1,7 +1,6 @@
 const knex = require('../db/connection');
 
 function list(date){
-    //console.log("date: ",date)
     return knex("reservations")
         .select("*")
         .where({"reservation_date":date})
@@ -26,7 +25,6 @@ function search(mobile_number){
 }
 
 function read(reservation_id){
-    //console.log(reservation_id)
     return knex("reservations")
     .select("*")
     .where({reservation_id})
@@ -42,7 +40,6 @@ function statusUpdate(reservation){
 }
 
 function update(updatedReservation){
-    console.log("update service: ", updatedReservation)
     return knex("reservations")
     .select("*")
     .where({reservation_id:updatedReservation.reservation_id})

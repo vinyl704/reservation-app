@@ -8,7 +8,6 @@ export default function TableForm(){
         table_name:'',
         capacity:0
     })
-    console.log(formData)
     const handleChange = ({target})=>{
         setFormData({...formData,[target.name]:target.value})
     }

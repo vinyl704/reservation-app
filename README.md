@@ -43,7 +43,7 @@ The Dashboard is located at /dashboard and has the following features:
 	- Each table will display "Free" or "Occupied".
 	- Each "Occupied" table will have a "Finish" button.
 - Displays any error messages returned from the API.
-- 
+ 
 ![Dashboard](pics/Dashboard.png)
 
 ### Create a New Reservation:
@@ -72,21 +72,18 @@ The Dashboard is located at /dashboard and has the following features:
 
 ![Seat-a-Reservation](pics/seat-reservation.png)
 
-### Finish an Occupied Table:
+### Edit a Reservation:
 
-Clicking on the "Finish" button of an "Occupied" table will return a tables status to "Free" and the
-reservation status to finished, after confirmation.
-
-![Finish-an-Occupied-Table](pics/finish-table.PNG)
+Clicking on the "Edit" button will bring up the reservation form filled with the associated reservation.
 
 ### Cancel a Reservation:
 
 Clicking "Cancel" cancels the user reservation and sets the status to cancelled.
 
-![Cancel-a-Reservation](pics/cancel-reservation.PNG)
+### Finish an Occupied Table:
 
-### Edit a Reservation:
+Clicking on the "Finish" button of an "Occupied" table will return a tables status to "Free" and the
+reservation status to finished, after confirmation.
 
-Clicking on the "Edit" button will bring up the reservation form filled with the associated reservation.
+![dash](pics/dashboard-reservations.png)
 
-![Edit-a-Reservation](pics/edit-reservation.png)

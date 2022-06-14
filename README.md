@@ -25,6 +25,15 @@ An application built for restaurant employess to keep track of customer reservat
 [Deployed Version](https://restaurant-app-client-barber.herokuapp.com/dashboard)
 
 [API](https://restaurant-app-backend-barber.herokuapp.com)
+	- GET `/tables` to list all tables
+	- PUT `/tables/:table_id/seat` to seat reservation at table
+	- DELETE `/tables/:table_id/seat` to finish table/reservation
+	- GET `/reservations?date=YYYY-MM-DD` to get all reservations for that date
+	- POST `/reservations` to create new reservation
+	- GET `/reservations/reservation_id` to get reservation
+	- PUT `/reservations/:reservation_id` to edit reservation
+	- PUT `/reservations/:reservation_id/status` to change reservation status
+	
 
 ## Screenshots 
 ### Dashboard:

@@ -1,6 +1,10 @@
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { createTable } from "../utils/api";
+import Error from "../reservations/Error";
+
+
+
 
 export default function TableForm() {
   const history = useHistory();
@@ -8,6 +12,10 @@ export default function TableForm() {
     table_name: "",
     capacity: 0,
   });
+  const [errors, setErrors] = useState({});
+const errorMap = Object.keys(errors).map((error, index) => (
+    <Error key={index} error={error} />
+  ));
   const handleChange = ({ target }) => {
     setFormData({ ...formData, [target.name]: target.value });
   };
@@ -28,13 +36,17 @@ export default function TableForm() {
       );
       history.push("/dashboard");
     } catch (error) {
-      throw error;
+      if (!errors[error.message]) {
+        setErrors({ ...errors, [error.message]: 1 });
+      }
     }
+    return ()=> ac.abort()
   };
 
   return (
     <>
       <h1 className="text-center">Create New Table</h1>
+      <div className="createErrors">{errorMap ? errorMap : null}</div>
       <form onSubmit={submitHandler}>
         <div className="d-flex flex-wrap align-items-center justify-content-center px-4 py-4">
           <div className="form-group mx-auto">

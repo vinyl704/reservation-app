@@ -27,6 +27,7 @@ export default function EditReservation() {
       });
     return () => ac.abort();
   }, [errors,reservation_id]);
+
   const errorMap = Object.keys(errors).map((error, index) => (
     <Error key={index} error={error} />
   ));
@@ -58,7 +59,7 @@ export default function EditReservation() {
   };
 
   return (
-    Object.keys(editFormData).length && (
+    Object.keys(editFormData).length ? (
       <>
         <div className="createErrors">{errorMap ? errorMap : null}</div>
         <ReservationForm
@@ -69,6 +70,6 @@ export default function EditReservation() {
           cancelHandler={handleCancel}
         />
       </>
-    )
+    ) : <h3>Loading</h3>
   );
 }

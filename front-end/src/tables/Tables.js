@@ -1,5 +1,6 @@
 import Table from "./Table";
 export default function Tables({ tables }) {
+  console.log(typeof tables, tables)
   return (
     <>
       <legend className="text-center">Tables</legend>
@@ -14,7 +15,7 @@ export default function Tables({ tables }) {
           </tr>
         </thead>
         <tbody>
-          {tables.map((table) => (
+          {tables && tables.map((table) => (
             <Table key={table.table_id} table={table} />
           ))}
         </tbody>

@@ -19,7 +19,7 @@ export default function Reservations({ reservations }) {
           </tr>
         </thead>
         <tbody>
-          {reservations.map((reservation) => (
+          {reservations && reservations.map((reservation) => (
             <Reservation
               key={reservation.reservation_id}
               reservation={reservation}

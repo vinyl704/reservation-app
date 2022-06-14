@@ -1,6 +1,5 @@
 import Table from "./Table";
 export default function Tables({ tables }) {
-  console.log(typeof tables, tables)
   return (
     <>
       <legend className="text-center">Tables</legend>

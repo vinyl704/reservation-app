@@ -36,14 +36,14 @@ export default function SeatReservation() {
   };
 
   return (
-    <div className="d-flex flex-column justify-content-center flex-wrap">
+    <div className="d-flex flex-column flex-wrap text-center">
       <h1>Seat Reservation #{reservation_id}</h1>
       <div className="createErrors">{errorMap ? errorMap : null}</div>
       
-      <div className="d-flex flex-column form-group">
+      <div className="d-flex flex-column form-group alilgn-items-center justify-content-center mx-auto">
         <select
           name="table_id"
-          className="form-control form-control-lg mx-auto my-2"
+          className="form-control form-control-lg mb-3"
           onChange={handleChange}
         >
           {tableList.map((table) => (
@@ -54,7 +54,7 @@ export default function SeatReservation() {
         </select>
         <button
           type="submit"
-          className="btn btn-lg btn-primary"
+          className="btn btn-lg btn-primary mb-3"
           onClick={submitHandler}
           
         >

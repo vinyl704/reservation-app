@@ -3,6 +3,7 @@
 .side-bar {
   background-color: #393a44;
   min-width: 220px;
+  max-height:100vh;
 }
 
 * {
@@ -37,4 +38,9 @@ th {
   justify-content: center;
   align-items: center;
   max-width: 100%;
+}
+
+form{
+  display: flex;
+  flex-direction: column;
 }

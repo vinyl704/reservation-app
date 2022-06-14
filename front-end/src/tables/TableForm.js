@@ -49,7 +49,7 @@ const errorMap = Object.keys(errors).map((error, index) => (
       <div className="createErrors">{errorMap ? errorMap : null}</div>
       <form onSubmit={submitHandler}>
         <div className="d-flex flex-wrap align-items-center justify-content-center px-4 py-4">
-          <div className="form-group mx-auto">
+          <div className="form-group col-7">
             <label
               htmlFor="table_name"
               className="col-form-label col-form-label-lg"
@@ -67,7 +67,7 @@ const errorMap = Object.keys(errors).map((error, index) => (
               required
             />
           </div>
-          <div className="form-group mx-auto">
+          <div className="form-group col-7">
             <label
               htmlFor="capacity"
               className="col-form-label col-form-label-lg"
@@ -85,12 +85,12 @@ const errorMap = Object.keys(errors).map((error, index) => (
             />
           </div>
         </div>
-        <div className="d-flex flex-wrap align-items-center justify-content-center">
-          <button className="btn btn-lg btn-primary mx-auto" type="submit">
+        <div className="d-flex flex-column align-items-center justify-content-center">
+          <button className="btn btn-lg btn-primary mb-3" type="submit">
             Submit
           </button>
           <button
-            className="btn btn-lg btn-danger mx-auto"
+            className="btn btn-lg btn-danger"
             onClick={cancelHandler}
           >
             Cancel

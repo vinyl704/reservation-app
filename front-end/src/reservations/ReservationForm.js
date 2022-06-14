@@ -12,7 +12,7 @@ export default function ReservationForm({
 }) {
   return (
     <>
-      <h1>{purpose} Reservation</h1>
+      <h1 className="text-center mt-4">{purpose} Reservation</h1>
       <form onSubmit={submitHandler}>
         <label htmlFor="firstName">First Name</label>
         <input

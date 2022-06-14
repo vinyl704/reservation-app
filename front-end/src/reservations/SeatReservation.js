@@ -36,7 +36,7 @@ export default function SeatReservation() {
   };
 
   return (
-    <div className="d-flex flex-column col-12 justify-content-center flex-wrap">
+    <div className="d-flex flex-column justify-content-center flex-wrap">
       <h1>Seat Reservation #{reservation_id}</h1>
       <div className="createErrors">{errorMap ? errorMap : null}</div>
       
@@ -56,13 +56,14 @@ export default function SeatReservation() {
           type="submit"
           className="btn btn-lg btn-primary"
           onClick={submitHandler}
+          
         >
           Submit
         </button>
         <button
           type="button"
           onClick={() => history.goBack()}
-          className="col-6 mx-auto btn btn-lg btn-danger"
+          className="mx-auto btn btn-lg btn-danger"
         >
           Cancel
         </button>

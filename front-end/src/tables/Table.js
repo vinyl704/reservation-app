@@ -33,6 +33,7 @@ export default function Table({ table }) {
         <td>
           {table.reservation_id && (
             <button
+              className="btn btn-secondary"
               data-table-id-finish={table.table_id}
               onClick={finishHandler}
             >

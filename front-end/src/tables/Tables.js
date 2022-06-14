@@ -1,10 +1,9 @@
-import "./tables.css";
 import Table from "./Table";
 export default function Tables({ tables }) {
   return (
     <>
       <legend className="text-center">Tables</legend>
-      <table className="table table-hover text-center">
+      <table className="table table-hover text-center rounded">
         <thead>
           <tr>
             <th scope="col">#</th>

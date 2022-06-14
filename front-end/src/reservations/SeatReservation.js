@@ -37,7 +37,7 @@ export default function SeatReservation() {
 
   return (
     <div className="d-flex flex-column col-12 justify-content-center flex-wrap">
-      <h1>Seat Reservation for #{reservation_id}</h1>
+      <h1>Seat Reservation #{reservation_id}</h1>
       <div className="createErrors">{errorMap ? errorMap : null}</div>
       <div className="d-flex flex-column">
         <select

@@ -19,8 +19,9 @@ export default function Search() {
     <div className="d-flex flex-column justify-content-center align-items-center mt-4">
       <h1 className="text-center mb-3">Search for reservation</h1>
       <form>
+      <div className="form-group">
         <input
-          className="mb-2"
+          className="form-control form-control-lg col-12"
           type="search"
           pattern="/\W/"
           name="mobile_number"
@@ -28,9 +29,10 @@ export default function Search() {
           onChange={handleChange}
           placeholder="Enter a customer's phone number"
         />
-        <button className="mb-2" type="submit" onClick={handleClick}>
+        <button className="btn btn-lg btn-secondary col-12" type="submit" onClick={handleClick}>
           Find
         </button>
+      </div>
       </form>
       {results.length ? (
         <Reservations reservations={results} />

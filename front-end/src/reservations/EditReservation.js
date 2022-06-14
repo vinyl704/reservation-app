@@ -19,9 +19,14 @@ export default function EditReservation() {
           reservation_date: res.reservation_date.split("T")[0],
         })
       )
-      .catch(setErrors);
+      .catch((error)=>{
+        
+        if (!errors[error.message]) {
+          setErrors({ ...errors, [error.message]: 1 });
+        }
+      });
     return () => ac.abort();
-  }, [reservation_id]);
+  }, [errors,reservation_id]);
   const errorMap = Object.keys(errors).map((error, index) => (
     <Error key={index} error={error} />
   ));

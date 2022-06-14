@@ -97,7 +97,7 @@ export async function editReservation(updatedReservation, signal) {
     signal,
   };
 
-  return await fetchJson(url, options, []);
+  return await fetchJson(url, options, {});
 }
 
 export async function seatReservation(tableId, reservation_id) {

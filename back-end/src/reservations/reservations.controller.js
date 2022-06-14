@@ -1,7 +1,6 @@
 const service = require("./reservations.service");
 const asyncErrorBoundary = require("../errors/asyncErrorBoundary");
 
-
 //middleware
 
 const hasProperties = require("../errors/hasProperties");
@@ -24,7 +23,7 @@ const VALID_PROPERTIES = [
   "created_at",
   "updated_at",
   "status",
-  "reservation_id"
+  "reservation_id",
 ];
 
 function hasOnlyValidProperties(req, res, next) {
@@ -103,7 +102,7 @@ function validPeople(req, res, next) {
 }
 
 function isStatusValid(req, res, next) {
-  const {data ={}} = req.body
+  const { data = {} } = req.body;
   const { status } = data;
   if (status == "booked" || status == undefined) {
     return next();
@@ -115,48 +114,51 @@ async function exists(req, res, next) {
   const { reservation_id } = req.params;
   const data = await service.read(reservation_id);
   if (data) {
-    res.locals.reservation = data
+    res.locals.reservation = data;
     return next();
   }
-return next({
-      status: 404,
-      message: `uhhh no: ${reservation_id} doesn't exist`,
-    }); 
+  return next({
+    status: 404,
+    message: `uhhh no: ${reservation_id} doesn't exist`,
+  });
 }
 
 function validStatus(req, res, next) {
-  const reservation = res.locals.reservation
-  const { data= {} } = req.body
-  const status = data.status
-  if(reservation.status === "finished"){ 
-    return next({status:400,message:`Reservation is already finished`})
+  const reservation = res.locals.reservation;
+  const { data = {} } = req.body;
+  const status = data.status;
+  if (reservation.status === "finished") {
+    return next({ status: 400, message: `Reservation is already finished` });
   }
 
-  const validStatuses = ["finished","booked","seated","cancelled"];
-  if(validStatuses.includes(status)){
+  const validStatuses = ["finished", "booked", "seated", "cancelled"];
+  if (validStatuses.includes(status)) {
     return next();
   }
-  return next({status:400,message:`Invalid or unknown status: ${status}`})
-  
+  return next({ status: 400, message: `Invalid or unknown status: ${status}` });
 }
 
-
+//Controller Functions
 
 async function list(req, res) {
   let current = new Date();
-  let cDate = current.getFullYear() + '-' + (current.getMonth() + 1) + '-' + current.getDate();
-  if(req.query.mobile_number){
-    const data = await service.search(req.query.mobile_number)
-    res.json({ data })
-  }else{
-    const { date } = req.query
-  res.json({ data: await service.list(date || cDate) });
+  let cDate =
+    current.getFullYear() +
+    "-" +
+    (current.getMonth() + 1) +
+    "-" +
+    current.getDate();
+  if (req.query.mobile_number) {
+    const data = await service.search(req.query.mobile_number);
+    res.json({ data });
+  } else {
+    const { date } = req.query;
+    res.json({ data: await service.list(date || cDate) });
   }
-  
 }
 
 function read(req, res) {
-  res.json({ data : res.locals.reservation });
+  res.json({ data: res.locals.reservation });
 }
 async function create(req, res) {
   const data = await service.create(req.body.data);
@@ -165,15 +167,15 @@ async function create(req, res) {
 
 async function statusUpdate(req, res) {
   const { status } = req.body.data;
-  const reservation = res.locals.reservation
-  reservation.status = status
+  const reservation = res.locals.reservation;
+  reservation.status = status;
   const data = await service.statusUpdate(reservation);
   res.json({ data });
 }
 
 async function update(req, res, next) {
-  const updatedReservation = {...req.body.data};
-  updatedReservation.reservation_id = res.locals.reservation.reservation_id
+  const updatedReservation = { ...req.body.data };
+  updatedReservation.reservation_id = res.locals.reservation.reservation_id;
   const data = await service.update(updatedReservation);
   res.json({ data });
 }
@@ -181,23 +183,27 @@ async function update(req, res, next) {
 module.exports = {
   list: asyncErrorBoundary(list),
   create: [
-    asyncErrorBoundary(hasOnlyValidProperties),
-    asyncErrorBoundary(hasRequiredProperties),
-    asyncErrorBoundary(validDate),
-    asyncErrorBoundary(validTime),
-    asyncErrorBoundary(validPeople),
+    hasOnlyValidProperties,
+    hasRequiredProperties,
+    validDate,
+    validTime,
+    validPeople,
     isStatusValid,
     asyncErrorBoundary(create),
   ],
   read: [asyncErrorBoundary(exists), read],
-  statusUpdate: [asyncErrorBoundary(exists),validStatus, asyncErrorBoundary(statusUpdate)],
+  statusUpdate: [
+    asyncErrorBoundary(exists),
+    validStatus,
+    asyncErrorBoundary(statusUpdate),
+  ],
   update: [
     asyncErrorBoundary(exists),
-    asyncErrorBoundary(hasOnlyValidProperties),
-    asyncErrorBoundary(hasRequiredProperties),
-    asyncErrorBoundary(validDate),
-    asyncErrorBoundary(validTime),
-    asyncErrorBoundary(validPeople),
+   hasOnlyValidProperties,
+    hasRequiredProperties,
+    validDate,
+    validTime,
+    validPeople,
     isStatusValid,
     asyncErrorBoundary(update),
   ],

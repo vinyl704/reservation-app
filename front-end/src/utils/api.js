@@ -88,8 +88,8 @@ export async function readReservation(reservation_id, signal) {
   return await fetchJson(url, options);
 }
 
-export async function editReservation(reservation_id,updatedReservation,signal){
-  const url = `${API_BASE_URL}/reservations/${reservation_id}`
+export async function editReservation(updatedReservation,signal){
+  const url = `${API_BASE_URL}/reservations/${updatedReservation.reservation_id}`
   const options = {
     method:'PUT',
     headers,
@@ -141,7 +141,11 @@ const options = {
 return await fetchJson(url,options,{})
 }
 
-export async function getTables(){
+export async function getTables(signal){
   const url = `${API_BASE_URL}/tables`
-  return await fetchJson(url)
+  const options = {
+    method: "GET",
+    signal,
+  };
+  return await fetchJson(url,options)
 }

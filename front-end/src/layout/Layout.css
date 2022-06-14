@@ -1,4 +1,49 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,500;1,300&display=swap');
+
+
 .side-bar {
   background-color: #393a44;
-  min-width: 200px;
+  min-width: 250px;
+
 }
+
+*{
+  
+  font-family: 'Open Sans', sans-serif;
+}
+
+main{
+  width:100%;
+  justify-content: center;
+  align-items: center;
+}
+.container,.container-fluid{
+  display:flex;
+  flex-flow: column wrap;
+}
+
+table{
+  margin: 0 auto;
+  width:100%;
+  border-radius: 20%;
+  border: 2px solid #393a44;
+}
+
+.btn{
+  margin: 5px auto;
+  border-radius: 10px;
+}
+
+td,tr,th{
+  width: max-content;
+  padding:12px;
+}
+
+
+#mainDisplay{
+  justify-content: center;
+  align-items: center;
+  max-width:100%;
+}
+
+

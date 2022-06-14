@@ -18,11 +18,11 @@ export default function Search(){
         return ()=>ac.abort()
     }
     return(
-        <div>
-
+        <div className="d-flex flex-column justify-content-center align-items-center mt-4">
+            <h1 className="text-center mb-3">Search for reservation</h1>
         <form>
-            <input type="search" pattern='/\W/' name="mobile_number" value={number} onChange={handleChange}/>
-            <button type="submit" onClick={handleClick}>Find</button>
+            <input className="mb-2" type="search" pattern='/\W/' name="mobile_number" value={number} onChange={handleChange} placeholder="Enter a customer's phone number"/>
+            <button className="mb-2" type="submit" onClick={handleClick}>Find</button>
         </form>
         {results.length ? <Reservations reservations={results}/> : <h3>No reservations found</h3>}
         </div>

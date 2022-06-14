@@ -37,23 +37,28 @@ export default function SeatReservation() {
   
   return (
     <div className="d-flex flex-column col-12 justify-content-center flex-wrap">
+      <h1>Seat Reservation for #{reservation_id}</h1>
       <div className="createErrors">{errorMap ? errorMap : null}</div>
-      <select name="table_id" className="mx-auto" onChange={handleChange}>
+      <div className="d-flex flex-column">
+
+      <select name="table_id" className="form-control form-control-lg mx-auto my-2" onChange={handleChange}>
         {tableList.map((table) => (
           <option key={table.table_id} value={table.table_id}>
             {table.table_name} - {table.capacity}
           </option>
         ))}
       </select>
-      <button type="submit" onClick={submitHandler}>
+      <button type="submit" className="btn btn-lg btn-primary" onClick={submitHandler}>
         Submit
       </button>
       <button
+        type="button"
         onClick={() => history.goBack()}
-        className="col-6 mx-auto btn btn-danger"
-      >
+        className="col-6 mx-auto btn btn-lg btn-danger"
+        >
         Cancel
       </button>
+        </div>
     </div>
   );
 }

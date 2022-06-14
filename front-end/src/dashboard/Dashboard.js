@@ -3,7 +3,7 @@ import { listReservations, getTables } from "../utils/api";
 import useQuery from "../utils/useQuery";
 import ErrorAlert from "../layout/ErrorAlert";
 import { today, next, previous } from "../utils/date-time";
-import { useHistory } from "react-router";
+import { useHistory } from "react-router-dom";
 import Reservations from "../reservations/Reservations";
 import Tables from "../tables/Tables";
 /**
@@ -53,11 +53,11 @@ function Dashboard({ date }) {
   };
 
   return (
-    <main>
-      <h1>Dashboard</h1>
-      <div className="d-md-flex mb-3">
-        <h4 className="mb-0">Reservations for date</h4>
-        <div className="btn-group">
+    <main className="container-fluid justify-content-center align-items-center">
+      <h1 className="text-center">Dashboard</h1>
+      <div className="d-flex flex-column mb-3">
+        <h4 className="mb-0 text-center">Reservations for date {pageDate}</h4>
+        <div className="btn-group mx-0">
           <button onClick={previousDateHandler} name="previous" className="btn btn-secondary">
             Previous Day
           </button>
@@ -69,12 +69,15 @@ function Dashboard({ date }) {
           </button>
         </div>
       </div>
-      <ErrorAlert error={reservationsError} />
-      <div className="col col-8">
+      <div className="container justify-content-center align-items-center col-12">
+
+      <ErrorAlert className="col col-12" error={reservationsError} />
+      <div className="col-12">
         <Reservations reservations={reservations} />
       </div>
-      <div className="col col-4">
+      <div className="col-12">
         <Tables tables={tables} />
+      </div>
       </div>
     </main>
   );

@@ -1,9 +1,10 @@
-const seed = require("./02-tables.json")
-exports.seed = function(knex) {
+const seed = require("./02-tables.json");
+exports.seed = function (knex) {
   // Deletes ALL existing entries
-  return knex('tables').del()
+  return knex("tables")
+    .del()
     .then(function () {
       // Inserts seed entries
-      return knex('tables').insert(seed);
+      return knex("tables").insert(seed);
     });
 };

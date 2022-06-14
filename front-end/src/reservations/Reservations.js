@@ -1,9 +1,9 @@
-import Reservation from "./Reservation"
-export default function Reservations({reservations}){
-
-    return(<>
-      <legend className='text-center'>Reservations</legend>
-    <table className="table table-hover text-center">
+import Reservation from "./Reservation";
+export default function Reservations({ reservations }) {
+  return (
+    <>
+      <legend className="text-center">Reservations</legend>
+      <table className="table table-hover text-center">
         <thead>
           <tr>
             <th scope="col">#</th>
@@ -19,9 +19,14 @@ export default function Reservations({reservations}){
           </tr>
         </thead>
         <tbody>
-          {reservations.map(reservation => <Reservation key={reservation.reservation_id} reservation={reservation}/>)}
+          {reservations.map((reservation) => (
+            <Reservation
+              key={reservation.reservation_id}
+              reservation={reservation}
+            />
+          ))}
         </tbody>
       </table>
     </>
-      )
+  );
 }

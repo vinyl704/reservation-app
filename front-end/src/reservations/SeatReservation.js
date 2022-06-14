@@ -13,11 +13,11 @@ export default function SeatReservation() {
   }, []);
   const [errors, setErrors] = useState({});
   const [selectedTable, setSelectedTable] = useState(1);
-  
+
   const errorMap = Object.keys(errors).map((error, index) => (
     <Error key={index} error={error} />
   ));
-  
+
   const submitHandler = async (e) => {
     e.preventDefault();
 
@@ -30,35 +30,42 @@ export default function SeatReservation() {
       }
     }
   };
-  
+
   const handleChange = (e) => {
     setSelectedTable(e.target.value);
   };
-  
+
   return (
     <div className="d-flex flex-column col-12 justify-content-center flex-wrap">
       <h1>Seat Reservation for #{reservation_id}</h1>
       <div className="createErrors">{errorMap ? errorMap : null}</div>
       <div className="d-flex flex-column">
-
-      <select name="table_id" className="form-control form-control-lg mx-auto my-2" onChange={handleChange}>
-        {tableList.map((table) => (
-          <option key={table.table_id} value={table.table_id}>
-            {table.table_name} - {table.capacity}
-          </option>
-        ))}
-      </select>
-      <button type="submit" className="btn btn-lg btn-primary" onClick={submitHandler}>
-        Submit
-      </button>
-      <button
-        type="button"
-        onClick={() => history.goBack()}
-        className="col-6 mx-auto btn btn-lg btn-danger"
+        <select
+          name="table_id"
+          className="form-control form-control-lg mx-auto my-2"
+          onChange={handleChange}
         >
-        Cancel
-      </button>
-        </div>
+          {tableList.map((table) => (
+            <option key={table.table_id} value={table.table_id}>
+              {table.table_name} - {table.capacity}
+            </option>
+          ))}
+        </select>
+        <button
+          type="submit"
+          className="btn btn-lg btn-primary"
+          onClick={submitHandler}
+        >
+          Submit
+        </button>
+        <button
+          type="button"
+          onClick={() => history.goBack()}
+          className="col-6 mx-auto btn btn-lg btn-danger"
+        >
+          Cancel
+        </button>
+      </div>
     </div>
   );
 }

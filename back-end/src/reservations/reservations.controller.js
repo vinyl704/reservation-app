@@ -199,7 +199,7 @@ module.exports = {
   ],
   update: [
     asyncErrorBoundary(exists),
-   hasOnlyValidProperties,
+    hasOnlyValidProperties,
     hasRequiredProperties,
     validDate,
     validTime,

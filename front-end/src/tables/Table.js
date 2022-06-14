@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { finishReservation } from "../utils/api";
 import { useHistory } from "react-router-dom";
-import ErrorAlert from '../layout/ErrorAlert'
+import ErrorAlert from "../layout/ErrorAlert";
 export default function Table({ table }) {
   const history = useHistory();
   const [error, setError] = useState(null);

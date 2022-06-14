@@ -58,26 +58,37 @@ function Dashboard({ date }) {
       <div className="d-flex flex-column mb-3">
         <h4 className="mb-0 text-center">Reservations for date {pageDate}</h4>
         <div className="btn-group mx-0">
-          <button onClick={previousDateHandler} name="previous" className="btn btn-secondary">
+          <button
+            onClick={previousDateHandler}
+            name="previous"
+            className="btn btn-secondary"
+          >
             Previous Day
           </button>
-          <button onClick={todayHandler} name="today" className="btn btn-secondary">
+          <button
+            onClick={todayHandler}
+            name="today"
+            className="btn btn-secondary"
+          >
             Today
           </button>
-          <button onClick={nextDateHandler} name="next" className="btn btn-secondary">
+          <button
+            onClick={nextDateHandler}
+            name="next"
+            className="btn btn-secondary"
+          >
             Next Day
           </button>
         </div>
       </div>
       <div className="container justify-content-center align-items-center col-12">
-
-      <ErrorAlert className="col col-12" error={reservationsError} />
-      <div className="col-12">
-        <Reservations reservations={reservations} />
-      </div>
-      <div className="col-12">
-        <Tables tables={tables} />
-      </div>
+        <ErrorAlert className="col col-12" error={reservationsError} />
+        <div className="col-12">
+          <Reservations reservations={reservations} />
+        </div>
+        <div className="col-12">
+          <Tables tables={tables} />
+        </div>
       </div>
     </main>
   );

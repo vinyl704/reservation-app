@@ -12,12 +12,14 @@ export default function EditReservation() {
 
   useEffect(() => {
     const ac = new AbortController();
-    readReservation(reservation_id, ac.signal).then((res) =>
-      setEditFormData({
-        ...res,
-        reservation_date: res.reservation_date.split("T")[0],
-      })
-    ).catch(setErrors);
+    readReservation(reservation_id, ac.signal)
+      .then((res) =>
+        setEditFormData({
+          ...res,
+          reservation_date: res.reservation_date.split("T")[0],
+        })
+      )
+      .catch(setErrors);
     return () => ac.abort();
   }, [reservation_id]);
   const errorMap = Object.keys(errors).map((error, index) => (
@@ -35,8 +37,8 @@ export default function EditReservation() {
   };
 
   const handleSubmit = async (e) => {
-      e.preventDefault();
-      setErrors({});
+    e.preventDefault();
+    setErrors({});
     const ac = new AbortController();
     editFormData.people = parseInt(editFormData.people);
     try {
@@ -49,17 +51,19 @@ export default function EditReservation() {
     }
     return () => ac.abort();
   };
-  
+
   return (
-    <>
-      <div className="createErrors">{errorMap ? errorMap : null}</div>
-      <ReservationForm
-        formData={editFormData}
-        purpose={"Edit"}
-        submitHandler={handleSubmit}
-        changeHandler={handleChange}
-        cancelHandler={handleCancel}
-      />
-    </>
+    Object.keys(editFormData).length && (
+      <>
+        <div className="createErrors">{errorMap ? errorMap : null}</div>
+        <ReservationForm
+          formData={editFormData}
+          purpose={"Edit"}
+          submitHandler={handleSubmit}
+          changeHandler={handleChange}
+          cancelHandler={handleCancel}
+        />
+      </>
+    )
   );
 }

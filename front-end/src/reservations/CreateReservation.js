@@ -16,7 +16,7 @@ export default function CreateReservation() {
   const [formData, setFormData] = useState(initForm);
   const [errors, setErrors] = useState({});
   const history = useHistory();
-  
+
   const errorMap = Object.keys(errors).map((error, index) => (
     <Error key={index} error={error} />
   ));
@@ -47,15 +47,15 @@ export default function CreateReservation() {
     return () => ac.abort();
   };
   return (
-      <>
-    <div className="createErrors">{errorMap ? errorMap : null}</div>
-    <ReservationForm
-      formData={formData}
-      purpose={"Create"}
-      submitHandler={submitHandler}
-      changeHandler={changeHandler}
-      cancelHandler={cancelHandler}
+    <>
+      <div className="createErrors">{errorMap ? errorMap : null}</div>
+      <ReservationForm
+        formData={formData}
+        purpose={"Create"}
+        submitHandler={submitHandler}
+        changeHandler={changeHandler}
+        cancelHandler={cancelHandler}
       />
-      </>
+    </>
   );
 }

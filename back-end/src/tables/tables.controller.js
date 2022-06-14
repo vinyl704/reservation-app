@@ -35,7 +35,6 @@ function validTableName(req, res, next) {
 }
 
 function validCapacity(req, res, next) {
-    
   if (
     req.body.data.capacity < 1 ||
     typeof req.body.data.capacity !== "number" ||
@@ -43,7 +42,7 @@ function validCapacity(req, res, next) {
   ) {
     return next({ status: 400, message: `invalid capacity` });
   }
-  return next()
+  return next();
 }
 
 async function hasReservationId(req, res, next) {
@@ -66,7 +65,7 @@ async function reservationExists(req, res, next) {
   const data = await resService.read(reservation_id);
 
   if (data) {
-    res.locals.reservation = data
+    res.locals.reservation = data;
     res.locals.people = data.people;
     return next();
   }
@@ -86,28 +85,30 @@ function tableLargeEnough(req, res, next) {
   return next();
 }
 
-function isSeated(req,res,next){
-  const reservation = res.locals.reservation
-  if(reservation.status === "booked"){
-    return next()
+function isSeated(req, res, next) {
+  const reservation = res.locals.reservation;
+  if (reservation.status === "booked") {
+    return next();
   }
-  return next({status:400,message:`Reservation already seated or otherwise`})
+  return next({
+    status: 400,
+    message: `Reservation already seated or otherwise`,
+  });
 }
 
-async function tableOccupied(req,res,next){
-    const { table_id } = req.params
-    const data = await service.read(table_id)
-    if(data.reservation_id){
-        res.locals.table_id = table_id
-        return next()
-    }
-    return next({status:400,message:"table not occupied"})
+async function tableOccupied(req, res, next) {
+  const { table_id } = req.params;
+  const data = await service.read(table_id);
+  if (data.reservation_id) {
+    res.locals.table_id = table_id;
+    return next();
+  }
+  return next({ status: 400, message: "table not occupied" });
 }
 async function list(req, res, next) {
   const data = await service.list();
   return res.json({ data });
 }
-
 
 //Controller functions
 function read(req, res, next) {
@@ -121,7 +122,6 @@ async function create(req, res, next) {
   res.status(201).json({ data });
 }
 
-
 async function update(req, res, next) {
   const { reservation_id } = req.body.data;
   const { table_id } = req.params;
@@ -130,20 +130,18 @@ async function update(req, res, next) {
   res.json({ data });
 }
 
-async function finish(req,res,next){
-    const { table:{table_id,reservation_id} } = res.locals
-    const data = await service.finish(table_id,reservation_id)
-    res.json({data})
+async function finish(req, res, next) {
+  const {
+    table: { table_id, reservation_id },
+  } = res.locals;
+  const data = await service.finish(table_id, reservation_id);
+  res.json({ data });
 }
 
 module.exports = {
   list: asyncErrorBoundary(list),
-  read: [asyncErrorBoundary(tableExists), 
-    read],
-  create: [hasData, 
-    validTableName, 
-    validCapacity, 
-    asyncErrorBoundary(create)],
+  read: [asyncErrorBoundary(tableExists), read],
+  create: [hasData, validTableName, validCapacity, asyncErrorBoundary(create)],
   update: [
     hasData,
     asyncErrorBoundary(hasReservationId),
@@ -154,7 +152,9 @@ module.exports = {
     tableLargeEnough,
     asyncErrorBoundary(update),
   ],
-  finish:[asyncErrorBoundary(tableExists),
+  finish: [
+    asyncErrorBoundary(tableExists),
     asyncErrorBoundary(tableOccupied),
-    asyncErrorBoundary(finish)]
+    asyncErrorBoundary(finish),
+  ],
 };

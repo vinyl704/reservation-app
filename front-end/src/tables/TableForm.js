@@ -34,7 +34,7 @@ export default function TableForm() {
 
   return (
     <>
-      <h1  className="text-center" >Create New Table</h1>
+      <h1 className="text-center">Create New Table</h1>
       <form onSubmit={submitHandler}>
         <div className="d-flex flex-wrap align-items-center justify-content-center px-4 py-4">
           <div className="form-group mx-auto">

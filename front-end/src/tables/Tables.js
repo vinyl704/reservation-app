@@ -1,11 +1,11 @@
-import './tables.css'
-import Table from './Table'
-export default function Tables({tables}){
-   
-    return(<>
-        <legend className='text-center'>Tables</legend>
+import "./tables.css";
+import Table from "./Table";
+export default function Tables({ tables }) {
+  return (
+    <>
+      <legend className="text-center">Tables</legend>
       <table className="table table-hover text-center">
-      <thead>
+        <thead>
           <tr>
             <th scope="col">#</th>
             <th scope="col">NAME</th>
@@ -14,10 +14,12 @@ export default function Tables({tables}){
             <th scope="col"> </th>
           </tr>
         </thead>
-        <tbody>{tables.map((table) => (
-          <Table key={table.table_id} table={table}/>
-          ))}</tbody>
+        <tbody>
+          {tables.map((table) => (
+            <Table key={table.table_id} table={table} />
+          ))}
+        </tbody>
       </table>
-          </>
-      )
+    </>
+  );
 }

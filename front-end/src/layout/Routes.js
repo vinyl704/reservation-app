@@ -9,7 +9,7 @@ import EditReservation from "../reservations/EditReservation";
 
 import TableForm from "../tables/TableForm";
 import SeatReservation from "../reservations/SeatReservation";
-import Search from "../reservations/Search"
+import Search from "../reservations/Search";
 /**
  * Defines all the routes for the application.
  *
@@ -24,7 +24,7 @@ function Routes() {
         <Redirect to={"/dashboard"} />
       </Route>
       <Route path="/reservations/new">
-        < CreateReservation />
+        <CreateReservation />
       </Route>
       <Route path="/reservations/:reservation_id/edit">
         <EditReservation />
@@ -39,7 +39,7 @@ function Routes() {
         <Dashboard date={today()} />
       </Route>
       <Route path="/tables/new">
-        <TableForm/>
+        <TableForm />
       </Route>
       <Route path="/search">
         <Search />

@@ -22,9 +22,9 @@ An application built for restaurant employess to keep track of customer reservat
     **X is the user story number**
 ## Links
 
-[Deployed Version](https://restaurant-app-client-barber.herokuapp.com/dashboard)
+- [Deployed Version](https://restaurant-app-client-barber.herokuapp.com/dashboard)
 
-[API](https://restaurant-app-backend-barber.herokuapp.com)
+- [API](https://restaurant-app-backend-barber.herokuapp.com)
 	- GET `/tables` to list all tables
 	- PUT `/tables/:table_id/seat` to seat reservation at table
 	- DELETE `/tables/:table_id/seat` to finish table/reservation

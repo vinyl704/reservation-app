@@ -1,9 +1,8 @@
 import { cancelReservation } from "../utils/api";
-import { useHistory } from "react-router";
+import { useHistory , Link } from "react-router-dom";
 
 export default function Reservation({ reservation }) {
   const history = useHistory();
-
   const cancelHandler = async (e) => {
     e.preventDefault();
     const conf = window.confirm(
@@ -29,24 +28,25 @@ export default function Reservation({ reservation }) {
       </td>
       <td>
         {reservation.status === "booked" ? (
-          <a
+          <Link
             className="btn btn-secondary"
-            href={`/reservations/${reservation.reservation_id}/seat`}
+            to={`/reservations/${reservation.reservation_id}/seat`}
           >
             Seat
-          </a>
+          </Link>
         ) : null}
       </td>
       <td>
-        <a
-          href={`/reservations/${reservation.reservation_id}/edit`}
+        <Link
+          to={`/reservations/${reservation.reservation_id}/edit`}
           className="btn btn-primary"
         >
           Edit
-        </a>
+        </Link>
       </td>
       <td>
         <button
+        type="button"
           className="btn btn-danger"
           onClick={cancelHandler}
           data-reservation-id-cancel={reservation.reservation_id}

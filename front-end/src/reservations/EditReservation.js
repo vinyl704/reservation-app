@@ -44,7 +44,7 @@ export default function EditReservation() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setErrors({});
+    
     const ac = new AbortController();
     editFormData.people = parseInt(editFormData.people);
     try {

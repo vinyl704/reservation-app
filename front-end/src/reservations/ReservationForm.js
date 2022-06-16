@@ -85,6 +85,7 @@ export default function ReservationForm({
           <button
             className="btn btn-lg btn-danger mx-auto"
             onClick={cancelHandler}
+            type="button"
           >
             Cancel
           </button>

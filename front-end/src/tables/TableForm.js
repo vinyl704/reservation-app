@@ -25,12 +25,12 @@ const errorMap = Object.keys(errors).map((error, index) => (
     history.goBack();
   };
 
-  const submitHandler = (e) => {
+  const submitHandler = async (e) => {
     e.preventDefault();
     const ac = new AbortController();
     const signal = ac.signal;
     try {
-      createTable(
+      await createTable(
         { ...formData, capacity: parseInt(formData.capacity) },
         signal
       );

@@ -1,5 +1,5 @@
 # Capstone: Restaurant Reservation System
-An application built for restaurant employess to keep track of customer reservations. It allows employees to seat, search, and add reservations as well as tracking open tables and completing reservations.
+An application built for restaurant employees to keep track of customer reservations. It allows employees to seat, search, and add reservations as well as tracking open tables and completing reservations.
 
 ## Technology
 

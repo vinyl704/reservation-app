@@ -13,7 +13,7 @@ export default function Table({ table }) {
     if (conf) {
       try {
         await finishReservation(table.table_id);
-        history.go(0);
+        history.go();
       } catch (err) {
         setError(err);
       }

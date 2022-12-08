@@ -22,7 +22,7 @@ An application built for restaurant employees to keep track of customer reservat
     **X is the user story number**
 ## Links
 
-- [Deployed Version](https://restaurant-app-client-barber.herokuapp.com/dashboard)
+- [Deployed Version](https://reservation-app-client.onrender.com/dashboard)
 
 - [API](https://restaurant-app-backend-barber.herokuapp.com)
 	- GET `/tables` to list all tables

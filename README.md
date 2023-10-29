@@ -24,7 +24,7 @@ An application built for restaurant employees to keep track of customer reservat
 
 - [Deployed Version](https://reservation-app-client.onrender.com/dashboard)
 
-- [API](https://restaurant-app-backend-barber.herokuapp.com)
+- [API]([https://restaurant-app-backend-barber.herokuapp.com](https://reservation-app-server.onrender.com))
 	- GET `/tables` to list all tables
 	- PUT `/tables/:table_id/seat` to seat reservation at table
 	- DELETE `/tables/:table_id/seat` to finish table/reservation

@@ -55,7 +55,12 @@ module.exports = {
   production: {
     client: "postgresql",
     pool: { min: 1, max: 5 },
-    connection: DATABASE_URL,
+    connection: {
+      connectionsString:DATABASE_URL,
+      ssl:{
+      rejectUnauthorized: true,
+    ca: fs.readFileSync("./ca.pem").toString(),
+      },
     migrations: {
       directory: path.join(__dirname, "src", "db", "migrations"),
     },

@@ -60,7 +60,7 @@ module.exports = {
       ssl:{
       rejectUnauthorized: true,
     ca: fs.readFileSync("./ca.pem").toString(),
-      },
+      },},
     migrations: {
       directory: path.join(__dirname, "src", "db", "migrations"),
     },
@@ -68,5 +68,5 @@ module.exports = {
       directory: path.join(__dirname, "src", "db", "seeds"),
     },
     debug: !!DEBUG,
-  },
+  
 };

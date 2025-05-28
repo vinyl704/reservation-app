@@ -54,7 +54,7 @@ module.exports = {
       connectionsString:DATABASE_URL,
       ssl:{
       rejectUnauthorized: true,
-    ca: fs.readFileSync("./ca.pem").toString(),
+    ca: process.env.DB_SSL,
       },
     },
     migrations: {

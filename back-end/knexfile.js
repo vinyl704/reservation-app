@@ -57,7 +57,7 @@ module.exports = {
     user: process.env.DB_USER,
     database: process.env.DB_NAME,
     password: process.env.DB_PASSWORD,
-    ssl: config['DB_SSL'] ? { rejectUnauthorized: false } : false,
+    ssl: process.env.DB_SSL ? { rejectUnauthorized: false } : false,
   },
     migrations: {
       directory: path.join(__dirname, "src", "db", "migrations"),

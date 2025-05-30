@@ -48,7 +48,7 @@ module.exports = {
     debug: !!DEBUG,
   },
   production: {
-    client: "postgres",
+    client: "postgresql",
     pool: { min: 1, max: 5 },
     connection: {
     connectionString: DATABASE_URL,

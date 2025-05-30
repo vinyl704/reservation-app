@@ -48,15 +48,17 @@ module.exports = {
     debug: !!DEBUG,
   },
   production: {
-    client: "postgresql",
+    client: "postgres",
     pool: { min: 1, max: 5 },
     connection: {
-      connectionsString:DATABASE_URL,
-      ssl:{
-      rejectUnauthorized: true,
-    ca: process.env.DB_SSL,
-      },
-    },
+    connectionString: DATABASE_URL,
+    host: process.env.DB_HOST,
+    port: process.env.DB_PORT,
+    user: process.env.DB_USER,
+    database: process.env.DB_NAME,
+    password: process.env.DB_PASSWORD,
+    ssl: config['DB_SSL'] ? { rejectUnauthorized: false } : false,
+  },
     migrations: {
       directory: path.join(__dirname, "src", "db", "migrations"),
     },

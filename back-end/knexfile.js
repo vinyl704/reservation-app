@@ -18,7 +18,7 @@ const {
   DEBUG,
 } = process.env;
 
-config = {
+const config = {
   DB_SSL: fs.readFileSync("ca.pem")
 }
 
